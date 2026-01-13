@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from alternatingGuidedFilter import alternating_guided_filter, alternating_guided_filter_numba
+from decomposition.alternatingGuidedFilter import alternating_guided_filter, alternating_guided_filter_numba
 
 def agf_decomposition(
     img,

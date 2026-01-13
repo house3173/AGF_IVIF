@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from jointBilateralFilter import joint_bilateral_filter, joint_bilateral_filter_numba
+from decomposition.jointBilateralFilter import joint_bilateral_filter, joint_bilateral_filter_numba
 
 def alternating_guided_filter(
     I,

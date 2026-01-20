@@ -35,7 +35,7 @@ def _sliding_views(a: np.ndarray, window_shape):
         strides = (s0, s1, s0, s1)
         return as_strided(a, shape=shape, strides=strides)
 
-def WLE_dynamic_var_optimized(matrix: np.ndarray, um: int = 3, pad_mode: str = "reflect") -> np.ndarray:
+def WLE_dynamic_var_optimized(matrix: np.ndarray, um: int = 5, pad_mode: str = "reflect") -> np.ndarray:
     """
     Optimized Weighted Laplacian Energy (variance-based) using sliding window views.
     Returns e with same shape as input matrix.

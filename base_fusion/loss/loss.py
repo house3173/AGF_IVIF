@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from base_fusion.loss_ssim import ssim
+from base_fusion.loss.loss_ssim import ssim
 
 class Sobelxy(nn.Module):
     def __init__(self):

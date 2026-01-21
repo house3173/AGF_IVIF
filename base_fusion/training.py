@@ -4,7 +4,7 @@ import torch.optim as optim
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-from base_fusion.model.convnext_fusion_net_ver3 import ConvNeXtFusionNetVer3
+from base_fusion.model.convnext_fusion_net_ver2 import ConvNeXtFusionNetVer2
 from base_fusion.loss.loss import fusion_loss_vif
 from base_fusion.data.data_loader import get_dataloader
 
@@ -63,7 +63,7 @@ def train_fusion(
     # =====================
     # Model & Loss
     # =====================
-    model = ConvNeXtFusionNetVer3().to(device)
+    model = ConvNeXtFusionNetVer2().to(device)
     criterion = fusion_loss_vif().to(device)
 
     optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-4)

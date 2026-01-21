@@ -43,7 +43,7 @@ class FusionDataset(Dataset):
             "name": name
         }
 
-def get_dataloader(root_dir, mode, batch_size, num_workers=4):
+def get_dataloader(root_dir, mode, batch_size, num_workers=2):
     transform = T.Compose([
         T.ToTensor(),   # [0,1], shape (1,H,W)
     ])

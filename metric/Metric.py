@@ -151,6 +151,15 @@ def Qabf_function(A, B, F):
 def Nabf_function(A, B, F):
     return Nabf_function(A, B, F)
 
+import numpy as np
+import math
+
+def normalize_to_gray(img, gray_level=256):
+    img = img.astype(np.float32)
+    img = (img - img.min()) / (img.max() - img.min() + 1e-8)
+    img = img * (gray_level - 1)
+    return img.astype(np.int32)
+
 
 def Hab(im1, im2, gray_level):
     hang, lie = im1.shape

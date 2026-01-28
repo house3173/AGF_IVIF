@@ -6,11 +6,11 @@ from decomposition.AGF_decomposition import agf_decomposition
 from base_PFCFuse.base_PFCFuse import pfcfuse_fuse_gray
 from detail_fusion.MVA_WLE import fuse_detail_dynamic_WLE_im2col_var_optimizer
 
-dataset = "TNO"
+dataset = "MSRS"
 number_images = 42
 if dataset == "MSRS":
     number_images = 80
-output_folder = "pfcfuse_tno_test"
+output_folder = "pfcfuse_msrs"
 if not os.path.exists(f".\\data\\output\\{output_folder}"):
     os.makedirs(f".\\data\\output\\{output_folder}")
 

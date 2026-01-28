@@ -3,13 +3,14 @@ from metric.eval_one_image import evaluation_one
 
 # Danh sách lưu kết quả từng ảnh
 dataset = "MSRS"
-root_folder = f".\\data\\output\\low"
+root_folder = f".\\data\\output\\high"
 
 number_images = 42
 if dataset == "MSRS":
     number_images = 80
 
-for method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
+# for method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
+for method in ["high_1", "high_2", "high_3", "high_4", "high_5"]:
     results = []
     for i in range(number_images):
         number_image = i + 1

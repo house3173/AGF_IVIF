@@ -12,7 +12,7 @@ if dataset == "MSRS":
     number_images = 80
 
 # for high_method in ["high_1", "high_2", "high_3", "high_4", "high_5"]:
-for high_method in ["high_3", "high_4", "high_5"]:
+for high_method in ["high_5"]:
     print()
     print("========================================")
     print(f"Processing with {high_method}...")

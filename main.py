@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from decomposition.AGF_decomposition import agf_decomposition
 from base_PFCFuse.base_PFCFuse import pfcfuse_fuse_gray
 from detail_fusion.MVA_WLE import fuse_detail_dynamic_WLE_im2col_var_optimizer
+from detail_fusion.MLE import MLE
 
 dataset = "MSRS"
 number_images = 42
@@ -47,7 +48,7 @@ for i in range(number_images):
 
     base_fused = pfcfuse_fuse_gray(base_ir, base_vi)
 
-    detail_fulsed = fuse_detail_dynamic_WLE_im2col_var_optimizer(detail_ir, detail_vi)
+    detail_fulsed = MLE(detail_ir, detail_vi)
 
     fused = np.clip(base_fused + detail_fulsed, 0, 1)
 

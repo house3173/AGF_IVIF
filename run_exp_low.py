@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from decomposition.AGF_decomposition import agf_decomposition
 from base_PFCFuse.base_PFCFuse import pfcfuse_fuse_gray
 from detail_fusion.MVA_WLE import fuse_detail_dynamic_WLE_im2col_var_optimizer
+from detail_fusion.MLE import MLE
 
 dataset = "MSRS"
 number_images = 42
@@ -16,7 +17,7 @@ for low_method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
     print("========================================")
     print(f"Processing with {low_method}...")
 
-    output_folder = f"low\\{low_method}"
+    output_folder = f"low_mre\\{low_method}"
     if not os.path.exists(f".\\data\\output\\{output_folder}"):
         os.makedirs(f".\\data\\output\\{output_folder}")
 
@@ -71,7 +72,8 @@ for low_method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
             from compare.low.low_6 import low_6
             base_fused = low_6(base_ir, base_vi)
 
-        detail_fulsed = fuse_detail_dynamic_WLE_im2col_var_optimizer(detail_ir, detail_vi)
+        # detail_fulsed = fuse_detail_dynamic_WLE_im2col_var_optimizer(detail_ir, detail_vi)
+        detail_fulsed = MLE(detail_ir, detail_vi)
 
         fused = np.clip(base_fused + detail_fulsed, 0, 1)
 

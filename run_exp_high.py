@@ -11,8 +11,7 @@ number_images = 42
 if dataset == "MSRS":
     number_images = 80
 
-# for high_method in ["high_1", "high_2", "high_3", "high_4", "high_5"]:
-for high_method in ["high_5"]:
+for high_method in ["high_1", "high_2", "high_3", "high_4", "high_5"]:
     print()
     print("========================================")
     print(f"Processing with {high_method}...")
@@ -67,6 +66,9 @@ for high_method in ["high_5"]:
         elif high_method == "high_5":
             from compare.high.high_5 import high_5
             detail_fused = high_5(detail_ir, detail_vi)
+        elif high_method == "high_6":
+            from compare.high.high_6 import high_6
+            detail_fused = high_6(detail_ir, detail_vi)
 
         base_fused = pfcfuse_fuse_gray(base_ir, base_vi)
 

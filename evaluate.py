@@ -1,24 +1,23 @@
+import os
 import pandas as pd
 from metric.eval_one_image import evaluation_one
 
 # Danh sách lưu kết quả từng ảnh
-dataset = "MSRS"
-root_folder = f".\\data\\output\\low_mre"
+dataset = "TNO36"
+root_folder = f".\\output"
+ir_folder = f".\\data\\{dataset}\\ir"
+vi_folder = f".\\data\\{dataset}\\vi"
+image_files = sorted(set(os.listdir(ir_folder)) & set(os.listdir(vi_folder)))
 
-number_images = 42
-if dataset == "MSRS":
-    number_images = 80
-
-for method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
-# for method in ["high_6"]:
+# for method in ["low_1", "low_2", "low_3", "low_4", "low_5", "low_6"]:
+for method in ["improve_TNO36"]:
     results = []
-    for i in range(number_images):
-        number_image = i + 1
-        code_image = f"{number_image:02d}"
+    for image_name in image_files:
+        code_image = os.path.splitext(image_name)[0]
 
-        ir_image = f".\\data\\{dataset}\\vi\\{code_image}.png"
-        vi_image = f".\\data\\{dataset}\\ir\\{code_image}.png"
-        fused_image = f"{root_folder}\\{method}\\{code_image}.png"
+        ir_image = f"{vi_folder}\\{image_name}"
+        vi_image = f"{ir_folder}\\{image_name}"
+        fused_image = f"{root_folder}\\{method}\\{image_name}"
 
         EN, MI, SF, AG, SD, MLI, CC, SCD, VIF, MSE, PSNR, Qabf, Nabf, SSIM, MS_SSIM = \
             evaluation_one(ir_image, vi_image, fused_image)

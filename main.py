@@ -7,25 +7,19 @@ from base_PFCFuse.base_PFCFuse import pfcfuse_fuse_gray
 from detail_fusion.MVA_WLE import fuse_detail_dynamic_WLE_im2col_var_optimizer
 from detail_fusion.MLE import MLE
 
-dataset = "MSRS"
-number_images = 42
-if dataset == "MSRS":
-    number_images = 80
-output_folder = "pfcfuse_msrs"
-if not os.path.exists(f".\\data\\output\\{output_folder}"):
-    os.makedirs(f".\\data\\output\\{output_folder}")
+dataset = "TNO36"
+ir_folder = f".\\data\\{dataset}\\ir"
+vi_folder = f".\\data\\{dataset}\\vi"
+image_files = sorted(set(os.listdir(ir_folder)) & set(os.listdir(vi_folder)))
+output_folder = "base_TNO36"
+if not os.path.exists(f".\\output\\{output_folder}"):
+    os.makedirs(f".\\output\\{output_folder}")
 
-for i in range(number_images):
-    number_image = i + 1
-    if number_image < 10:
-        code_image = '0'+str(number_image)
-    else:
-        code_image = str(number_image)
-
+for number_image, image_name in enumerate(image_files, start=1):
     # Decompose image
-    img_vi = cv2.imread(f".\\data\\{dataset}\\vi\\{code_image}.png", cv2.IMREAD_GRAYSCALE)
+    img_vi = cv2.imread(f"{vi_folder}\\{image_name}", cv2.IMREAD_GRAYSCALE)
     img_vi = img_vi.astype(np.float32) / 255.0
-    img_ir = cv2.imread(f".\\data\\{dataset}\\ir\\{code_image}.png", cv2.IMREAD_GRAYSCALE)
+    img_ir = cv2.imread(f"{ir_folder}\\{image_name}", cv2.IMREAD_GRAYSCALE)
     img_ir = img_ir.astype(np.float32) / 255.0  
 
     base_vi, detail_vi = agf_decomposition(
@@ -52,6 +46,6 @@ for i in range(number_images):
 
     fused = np.clip(base_fused + detail_fulsed, 0, 1)
 
-    cv2.imwrite(f".\\data\\output\\{output_folder}\\{code_image}.png", (fused * 255).astype(np.uint8))
+    cv2.imwrite(f".\\output\\{output_folder}\\{image_name}", (fused * 255).astype(np.uint8))
 
-    print(f"{number_image}. Finished image {code_image}")
+    print(f"{number_image}. Finished image {image_name}")
